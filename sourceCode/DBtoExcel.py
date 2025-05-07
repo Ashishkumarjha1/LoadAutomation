@@ -1,4 +1,4 @@
-#latest script of database to excel 30|05
+
 import pymysql
 import numpy as np
 import argparse
@@ -113,28 +113,7 @@ camera_names = sorted(camera_names)
 camNames = f"{camera_names[0]}-{camera_names[-1]}"
 # print(camNames)  # Output: LOAD1-5
 
-# Fetch unique values from "Feature" column
-# try:
-#     with conn.cursor() as cursor:
-#         sql = "SELECT DISTINCT Feature FROM alerts"
-#         cursor.execute(sql)
-#         rows = cursor.fetchall()
-# except pymysql.Error as e:
-#     print(f"MySQL query error: {e}")
-#     conn.close()
-#     exit()
 
-# # Create comma-separated string of unique values
-# if rows:
-#     # print(rows)
-#     if len(rows) == 1 and len(rows[0]) == 1:
-#         features_str = rows[0]['Feature']
-#     else:
-#         features = [row['Feature'] for row in rows]
-#         features_str = ", ".join(features)
-#     # print(features_str)
-# else:
-#     print("No results found.")
 
 try:
     with conn.cursor() as cursor:

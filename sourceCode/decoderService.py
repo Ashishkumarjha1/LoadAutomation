@@ -1,4 +1,4 @@
-#final working with real times
+
 import subprocess
 
 directory = "/home/allgovision/AGV/data/AllGoVision/ProgramData"

@@ -103,11 +103,7 @@ def getServerInfo(camList):
                 iMaxPower = int(iMaxPow) if iMaxPow else 0
                 #print(type(iMaxPower))
 
-        # for oLine in range(len(powerLines)):
-        #     if ("MiB" in powerLines[oLine]) and ("W" in powerLines[oLine]) and ("C" in powerLines[oLine]):
-        #         oLineSplit = powerLines[oLine].split("\n")[0].split(" / ")
-        #         iMaxPow = oLineSplit[1].split(" ")[0].split("W")[0]
-        #         iMaxPower = int(iMaxPow)
+        
 
     #serverip
     server_ip=-1

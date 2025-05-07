@@ -1,5 +1,4 @@
 
-# Latest code 31May2024
 import subprocess
 import pymysql
 import datetime

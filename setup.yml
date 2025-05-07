@@ -1,0 +1,81 @@
+---
+- name: Copy scripts and run Bash script
+  hosts: server1
+  become: no
+  gather_facts: no
+  vars:
+    ansible_deprecation_warnings: false
+    ansible_command_warnings: false
+    time_to_run: "<time_in_seconds>"
+  tasks:
+    - name: Copying main.exe to remote machine
+      copy:
+        src: "main"
+        dest: "/home/allgovision/LoadTest_Scripts/"
+        mode: "u=rwx,g=rx,o=rx"
+        owner: "{{ ansible_ssh_user }}"
+        group: "{{ ansible_ssh_user }}"
+      register: python_scripts
+
+    - name: Copying default table sql file to remote machine
+      copy:
+        src: "default-tables.sql"
+        dest: "/home/allgovision/LoadTest_Scripts"
+        mode: "u=rwx,g=rx,o=rx"
+        owner: "{{ ansible_ssh_user }}"
+        group: "{{ ansible_ssh_user }}"
+      register: python_scripts
+
+    - name: Copying camerainfo.exe to remote machine
+      copy:
+        src: "camerainfo"
+        dest: "/home/allgovision/LoadTest_Scripts"
+        mode: "u=rwx,g=rx,o=rx"
+        owner: "{{ ansible_ssh_user }}"
+        group: "{{ ansible_ssh_user }}"
+      register: python_scripts
+
+    - name: Copying alerts.exe to remote machine
+      copy:
+        src: "alerts"
+        dest: "/home/allgovision/LoadTest_Scripts/"
+        mode: "u=rwx,g=rx,o=rx"
+        owner: "{{ ansible_ssh_user }}"
+        group: "{{ ansible_ssh_user }}"
+      register: python_scripts
+
+    - name: Copying cpugupstats.exe to remote machine
+      copy:
+        src: "cpugpustats"
+        dest: "/home/allgovision/LoadTest_Scripts"
+        mode: "u=rwx,g=rx,o=rx"
+        owner: "{{ ansible_ssh_user }}"
+        group: "{{ ansible_ssh_user }}"
+      register: python_scripts
+     
+    - name: Copying decoderService.exe to remote machine
+      copy:
+        src: "decoderService"
+        dest: "/home/allgovision/LoadTest_Scripts"
+        mode: "u=rwx,g=rx,o=rx"
+        owner: "{{ ansible_ssh_user }}"
+        group: "{{ ansible_ssh_user }}"
+      register: python_scripts
+
+    - name: Copying Bash script to remote machine
+      copy:
+        src: "install.sh"
+        dest: "/home/allgovision/LoadTest_Scripts"
+        mode: "u=rwx,g=rx,o=rx"
+        owner: "{{ ansible_ssh_user }}"
+        group: "{{ ansible_ssh_user }}"
+      register: bash_script
+
+    - name: Running Bash script for specified time
+      become_user: "allgovision"
+      async: "{{ time_to_run }}"
+      poll: 30 # check every 30 seconds
+      shell: "bash /home/allgovision/LoadTest_Scripts/install.sh {{ db_name }} {{ ip }} {{ modified_camera_names }} {{No_of_cameras}} {{ time_to_run }} {{ db_ip }}"
+      register: bash_script_output
+      ignore_errors: no
+      when: bash_script
